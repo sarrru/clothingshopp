@@ -1,43 +1,105 @@
+import 'package:clothingshopp/screens/auth/forget_password_screen.dart';
+import 'package:clothingshopp/screens/auth/login_screen.dart';
+import 'package:clothingshopp/screens/auth/register_screen.dart';
+import 'package:clothingshopp/screens/category/single_category_screen.dart';
+import 'package:clothingshopp/screens/dashboard/dashboard.dart';
+import 'package:clothingshopp/screens/product/add_product_screen.dart';
+import 'package:clothingshopp/screens/product/edit_product_screen.dart';
+import 'package:clothingshopp/screens/product/my_product_screen.dart';
+import 'package:clothingshopp/screens/product/single_product_screen.dart';
+import 'package:clothingshopp/screens/splash_screen.dart';
+import 'package:clothingshopp/services/local_notification_service.dart';
+import 'package:clothingshopp/viewmodels/auth_viewmodel.dart';
+import 'package:clothingshopp/viewmodels/category_viewmodel.dart';
+import 'package:clothingshopp/viewmodels/global_ui_viewmodel.dart';
+import 'package:clothingshopp/viewmodels/product_viewmodel.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  NotificationService.initialize();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a blue toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => GlobalUIViewModel()),
+        ChangeNotifierProvider(create: (_) => AuthViewModel()),
+        ChangeNotifierProvider(create: (_) => CategoryViewModel()),
+        ChangeNotifierProvider(create: (_) => ProductViewModel()),
+      ],
+      child: GlobalLoaderOverlay(
+        useDefaultLoading: false,
+        overlayWidget: Center(
+          child: Image.asset(
+            "assets/images/no-item-in-cart.gif",
+            height: 100,
+            width: 100,
+          ),
+        ),
+        child: Consumer<GlobalUIViewModel>(builder: (context, loader, child) {
+          if (loader.isLoading) {
+            context.loaderOverlay.show();
+          } else {
+            context.loaderOverlay.hide();
+          }
+          return MaterialApp(
+            title: 'Flutter Demo',
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              // This is the theme of your application.
+              //
+              // Try running your application with "flutter run". You'll see the
+              // application has a blue toolbar. Then, without quitting the app, try
+              // changing the primarySwatch below to Colors.green and then invoke
+              // "hot reload" (press "r" in the console where you ran "flutter run",
+              // or simply save your changes to "hot reload" in a Flutter IDE).
+              // Notice that the counter didn't reset back to zero; the application
+              // is not restarted.
+              primarySwatch: Colors.green,
+              textTheme: GoogleFonts.aBeeZeeTextTheme(),
+            ),
+            initialRoute: "/splash",
+            routes: {
+              "/login": (BuildContext context) => LoginScreen(),
+              "/splash": (BuildContext context) => SplashScreen(),
+              "/register": (BuildContext context) => RegisterScreen(),
+              "/forget-password": (BuildContext context) =>
+                  ForgetPasswordScreen(),
+              "/dashboard": (BuildContext context) => DashboardScreen(),
+              "/add-product": (BuildContext context) => AddProductScreen(),
+              "/edit-product": (BuildContext context) => EditProductScreen(),
+              "/single-product": (BuildContext context) =>
+                  SingleProductScreen(),
+              "/single-category": (BuildContext context) =>
+                  SingleCategoryScreen(),
+              "/my-products": (BuildContext context) => MyProductScreen(),
+              // "/my-profile":(BuildContext context)=>ProfilePage(),
+            },
+          );
+        }),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -78,10 +140,6 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
@@ -94,15 +152,16 @@ class _MyHomePageState extends State<MyHomePage> {
           // arranges them vertically. By default, it sizes itself to fit its
           // children horizontally, and tries to be as tall as its parent.
           //
+          // Invoke "debug painting" (press "p" in the console, choose the
+          // "Toggle Debug Paint" action from the Flutter Inspector in Android
+          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
+          // to see the wireframe for each widget.
+          //
           // Column has various properties to control how it sizes itself and
           // how it positions its children. Here we use mainAxisAlignment to
           // center the children vertically; the main axis here is the vertical
           // axis because Columns are vertical (the cross axis would be
           // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
@@ -110,7 +169,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+              style: Theme.of(context).textTheme.headline4,
             ),
           ],
         ),

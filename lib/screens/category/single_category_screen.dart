@@ -15,11 +15,8 @@ class SingleCategoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<SingleCategoryViewModel>(
-        create: (_) => z(), child: SingleCategoryBody());
+        create: (_) => SingleCategoryViewModel(), child: SingleCategoryBody());
   }
-}
-
-class z {
 }
 
 class SingleCategoryBody extends StatefulWidget {
@@ -63,71 +60,71 @@ class _SingleCategoryBodyState extends State<SingleCategoryBody> {
   Widget build(BuildContext context) {
     return Consumer<SingleCategoryViewModel>(
         builder: (context, singleCategoryVM, child) {
-      return SafeArea(
-        child: singleCategoryVM.category == null
-            ? Text("Please wait")
-            : Scaffold(
-                appBar: AppBar(
-                  backgroundColor: Colors.black54,
-                ),
-                body: RefreshIndicator(
-                  onRefresh: () => getData(categoryId.toString()),
-                  child: SingleChildScrollView(
-                    physics: AlwaysScrollableScrollPhysics(),
-                    child: Column(
-                      children: [
-                        if (singleCategoryVM.category != null &&
-                            singleCategoryVM.category!.imageUrl != null)
-                          Stack(
-                            children: [
-                              Image.network(
-                                singleCategoryVM.category!.imageUrl.toString(),
-                                height: 250,
-                                fit: BoxFit.cover,
+          return SafeArea(
+            child: singleCategoryVM.category == null
+                ? Text("Please wait")
+                : Scaffold(
+              appBar: AppBar(
+                backgroundColor: Colors.black54,
+              ),
+              body: RefreshIndicator(
+                onRefresh: () => getData(categoryId.toString()),
+                child: SingleChildScrollView(
+                  physics: AlwaysScrollableScrollPhysics(),
+                  child: Column(
+                    children: [
+                      if (singleCategoryVM.category != null &&
+                          singleCategoryVM.category!.imageUrl != null)
+                        Stack(
+                          children: [
+                            Image.network(
+                              singleCategoryVM.category!.imageUrl.toString(),
+                              height: 250,
+                              fit: BoxFit.cover,
+                            ),
+                            Positioned.fill(
+                              child: Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Container(
+                                    width: double.infinity,
+                                    decoration:
+                                    BoxDecoration(color: Colors.white70),
+                                    child: Text(
+                                      singleCategoryVM.category!.categoryName
+                                          .toString(),
+                                      style: TextStyle(
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.w700),
+                                    )),
                               ),
-                              Positioned.fill(
-                                child: Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: Container(
-                                      width: double.infinity,
-                                      decoration:
-                                          BoxDecoration(color: Colors.white70),
-                                      child: Text(
-                                        singleCategoryVM.category!.categoryName
-                                            .toString(),
-                                        style: TextStyle(
-                                            fontSize: 30,
-                                            fontWeight: FontWeight.w700),
-                                      )),
-                                ),
-                              )
-                            ],
-                          ),
-                        SizedBox(
-                          height: 20,
+                            )
+                          ],
                         ),
-                        Container(
-                          margin: EdgeInsets.symmetric(horizontal: 10),
-                          child: GridView.count(
-                            crossAxisSpacing: 10,
-                            mainAxisSpacing: 10,
-                            childAspectRatio: 0.7,
-                            physics: NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            crossAxisCount: 2,
-                            children: [
-                              ...singleCategoryVM.products
-                                  .map((e) => ProductCard(e))
-                            ],
-                          ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 10),
+                        child: GridView.count(
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 10,
+                          childAspectRatio: 0.7,
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          crossAxisCount: 2,
+                          children: [
+                            ...singleCategoryVM.products
+                                .map((e) => ProductCard(e))
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
-      );
-    });
+            ),
+          );
+        });
   }
 
   Widget ProductCard(ProductModel e) {
@@ -166,7 +163,7 @@ class _SingleCategoryBodyState extends State<SingleCategoryBody> {
                       width: double.infinity,
                       padding: EdgeInsets.symmetric(vertical: 5),
                       decoration:
-                          BoxDecoration(color: Colors.white.withOpacity(0.8)),
+                      BoxDecoration(color: Colors.white.withOpacity(0.8)),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
