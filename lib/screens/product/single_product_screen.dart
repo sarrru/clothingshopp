@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../../viewmodels/auth_viewmodel.dart';
 import '../../viewmodels/global_ui_viewmodel.dart';
+import '../../viewmodels/single_product_viewmodel.dart';
 
 class SingleProductScreen extends StatefulWidget {
   const SingleProductScreen({Key? key}) : super(key: key);

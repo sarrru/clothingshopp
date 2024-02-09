@@ -10,6 +10,7 @@ import '../../models/product_model.dart';
 import '../../services/file_upload.dart';
 import '../../viewmodels/auth_viewmodel.dart';
 import '../../viewmodels/global_ui_viewmodel.dart';
+import '../../viewmodels/single_product_viewmodel.dart';
 
 class EditProductScreen extends StatefulWidget {
   const EditProductScreen({Key? key}) : super(key: key);
