@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../../models/product_model.dart';
 import '../../viewmodels/global_ui_viewmodel.dart';
+import '../../viewmodels/single_category_viewmodel.dart';
 
 class SingleCategoryScreen extends StatelessWidget {
   const SingleCategoryScreen({Key? key}) : super(key: key);
