@@ -1,5 +1,5 @@
 
-]
+
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import '../../models/product_model.dart';
 import '../../services/file_upload.dart';
 import '../../viewmodels/auth_viewmodel.dart';
+import '../../viewmodels/category_viewmodel.dart';
 import '../../viewmodels/global_ui_viewmodel.dart';
 import '../../viewmodels/single_product_viewmodel.dart';
 
