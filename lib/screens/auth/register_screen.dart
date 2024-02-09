@@ -4,10 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../models/user_model.dart';
-import '../services/local_notification_service.dart';
-import '../viewmodels/auth_viewmodel.dart';
-import '../viewmodels/global_ui_viewmodel.dart';
+import '../../models/user_model.dart';
+import '../../services/local_notification_service.dart';
+import '../../viewmodels/auth_viewmodel.dart';
+import '../../viewmodels/global_ui_viewmodel.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
