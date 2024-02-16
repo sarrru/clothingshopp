@@ -79,6 +79,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                   "assets/images/splaash.jpg",
                                   fit: BoxFit.fill,
                                 ),
+                                Image.asset(
+                                  "assets/images/splaash.jpg",
+                                  fit: BoxFit.fill,
+                                ),
 
                                 Image.asset(
                                   "assets/images/secondd.jpg",

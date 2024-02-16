@@ -15,7 +15,6 @@ import 'package:clothingshopp/viewmodels/global_ui_viewmodel.dart';
 import 'package:clothingshopp/viewmodels/product_viewmodel.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
@@ -72,7 +71,6 @@ class MyApp extends StatelessWidget {
               // Notice that the counter didn't reset back to zero; the application
               // is not restarted.
               primarySwatch: Colors.green,
-              textTheme: GoogleFonts.aBeeZeeTextTheme(),
             ),
             initialRoute: "/splash",
             routes: {

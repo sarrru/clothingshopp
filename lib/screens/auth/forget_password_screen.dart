@@ -51,7 +51,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
               child: Column(
                 children: [
                   Image.asset(
-                    "assets/images/clothsplash.gif",
+                    "assets/images/splash1.gif",
                     height: 200,
                     width: 300,
                   ),
