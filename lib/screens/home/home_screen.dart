@@ -69,37 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            CarouselSlider(
-                              items: [
-                                Image.asset(
-                                  "assets/images/f1rst.jpg",
-                                  fit: BoxFit.fill,
-                                ),
-                                Image.asset(
-                                  "assets/images/splaash.jpg",
-                                  fit: BoxFit.fill,
-                                ),
-                                Image.asset(
-                                  "assets/images/splaash.jpg",
-                                  fit: BoxFit.fill,
-                                ),
-
-                                Image.asset(
-                                  "assets/images/secondd.jpg",
-                                  fit: BoxFit.fill,
-                                ),
-                                // Add more images as needed
-                              ],
-                              options: CarouselOptions(
-                                height: 250, // Set the height of the slider
-                                viewportFraction: 1.0,
-                                autoPlay: true,
-                                autoPlayInterval: Duration(seconds: 3),
-                                autoPlayAnimationDuration:
-                                    Duration(milliseconds: 800),
-                                autoPlayCurve: Curves.fastOutSlowIn,
-                              ),
-                            ),
+                            Sliders(),
                             SizedBox(
                               height: 20,
                             ),
@@ -242,6 +212,47 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+
+
+class Sliders extends StatelessWidget {
+  const Sliders({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return CarouselSlider(
+      items: [
+        Image.asset(
+          "assets/images/f1rst.jpg",
+          fit: BoxFit.fill,
+        ),
+        Image.asset(
+          "assets/images/splaash.jpg",
+          fit: BoxFit.fill,
+        ),
+        Image.asset(
+          "assets/images/splaash.jpg",
+          fit: BoxFit.fill,
+        ),
+
+        Image.asset(
+          "assets/images/secondd.jpg",
+          fit: BoxFit.fill,
+        ),
+        // Add more images as needed
+      ],
+      options: CarouselOptions(
+        height: 250, // Set the height of the slider
+        viewportFraction: 1.0,
+        autoPlay: true,
+        autoPlayInterval: Duration(seconds: 3),
+        autoPlayAnimationDuration:
+        Duration(milliseconds: 800),
+        autoPlayCurve: Curves.fastOutSlowIn,
       ),
     );
   }

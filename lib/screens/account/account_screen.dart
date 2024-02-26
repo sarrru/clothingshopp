@@ -93,27 +93,27 @@ class _AccountScreenState extends State<AccountScreen> {
       required String title,
       required String subtitle,
       Function()? onTap}) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 5),
-        child: Card(
-            elevation: 4,
-            color: Colors.white,
-            child: ListTile(
-                tileColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(0.5),
-                ),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 8.0),
-                leading: icon,
-                title: Text(
-                  title,
-                ),
-                subtitle: Text(
-                  subtitle,
-                ))),
-      ),
-    );
+      return InkWell(
+        onTap: onTap,
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 5),
+          child: Card(
+              elevation: 4,
+              color: Colors.white,
+              child: ListTile(
+                  tileColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(0.5),
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  leading: icon,
+                  title: Text(
+                    title,
+                  ),
+                  subtitle: Text(
+                    subtitle,
+                  ))),
+        ),
+      );
   }
 }
