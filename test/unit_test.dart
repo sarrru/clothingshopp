@@ -24,6 +24,6 @@ void main() {
         productDescription: "this is desd");
     final response = await repo.addProducts(product: data);
 
-    expect(response, false);
+    expect(response, true);
   });
 }

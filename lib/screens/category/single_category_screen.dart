@@ -129,7 +129,7 @@ class _SingleCategoryBodyState extends State<SingleCategoryBody> {
 
   Widget ProductCard(ProductModel e) {
     return InkWell(
-      key: Key(e.id.toString()),
+      key: Key("productCard"),
       onTap: () {
         // print(e.id);
         Navigator.of(context).pushNamed("/single-product", arguments: e.id);
